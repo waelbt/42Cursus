@@ -6,28 +6,24 @@
 /*   By: waboutzo <waboutzo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/10 15:10:45 by waboutzo          #+#    #+#             */
-/*   Updated: 2022/04/12 14:18:08 by waboutzo         ###   ########.fr       */
+/*   Updated: 2022/04/14 00:02:18 by waboutzo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/so_long.h"
 
-void	initialise_images(t_vars *v, char *w, char *p, char *e)
+void	initialise_images(t_vars *v, char *e)
 {
 	int		wid;
 	int		hei;
 	char	*str;
 
-	str = ft_strjoin("assets/player/", p);
-	v->pla = mlx_xpm_file_to_image(v->mlx, str, &wid, &hei);
-	free(str);
-	str = ft_strjoin("assets/wall/", w);
-	v->wal = mlx_xpm_file_to_image(v->mlx, str, &wid, &hei);
-	free(str);
-	v->col = mlx_xpm_file_to_image(v->mlx, "assets/c/1.xpm", &wid, &hei);
 	str = ft_strjoin("assets/exit/", e);
 	v->exi = mlx_xpm_file_to_image(v->mlx, str, &wid, &hei);
 	free(str);
+	v->pla = mlx_xpm_file_to_image(v->mlx, "assets/player/1.xpm", &wid, &hei);
+	v->wal = mlx_xpm_file_to_image(v->mlx, "assets/wall/1.xpm", &wid, &hei);
+	v->col = mlx_xpm_file_to_image(v->mlx, "assets/c/1.xpm", &wid, &hei);
 	v->bg = mlx_xpm_file_to_image(v->mlx, "assets/bg/1.xpm", &wid, &hei);
 }
 

@@ -6,7 +6,7 @@
 /*   By: waboutzo <waboutzo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 08:31:26 by waboutzo          #+#    #+#             */
-/*   Updated: 2022/04/12 14:18:08 by waboutzo         ###   ########.fr       */
+/*   Updated: 2022/04/13 16:01:38 by waboutzo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ typedef struct s_vars {
 	int		p;
 	int		x;
 	int		y;
+	int		moves;
 }				t_vars;
 
 char	*get_next_line(int fd);
@@ -62,7 +63,7 @@ int		ft_putstr(char *s);
 void	ft_render(t_vars *vars);
 void	find_player(t_vars *data);
 void	moves(t_vars *data, int keycode);
-void	initialise_images(t_vars *vars, char *w, char *p, char *e);
+void	initialise_images(t_vars *v, char *e);
 int		count_c(t_vars *data);
 int		find_exit(t_vars *data);
 int		ft_putnbr(int nb);
