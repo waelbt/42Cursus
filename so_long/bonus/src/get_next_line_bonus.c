@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_bouns.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: waboutzo <waboutzo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: waboutzo <waboutzo@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/26 19:26:39 by waboutzo          #+#    #+#             */
-/*   Updated: 2022/04/13 15:52:21 by waboutzo         ###   ########.fr       */
+/*   Updated: 2022/04/21 05:15:56 by waboutzo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/so_long_bouns.h"
+#include "../include/so_long_bonus.h"
 
 char	*get_line(char *s1, int rd)
 {

@@ -94,13 +94,13 @@ void	moves(t_vars *d, int keycode)
 	static char	c = 'E';
 
 	find_player(d);
-	if (keycode == 0 && charcmp(d->matrix[d->x][d->y - 1], '1', c))
+	if (keycode == 97 && charcmp(d->matrix[d->x][d->y - 1], '1', c))
 		ft_norm(d, 0, -1);
-	if (keycode == 1 && charcmp(d->matrix[d->x + 1][d->y], '1', c))
+	if (keycode == 115 && charcmp(d->matrix[d->x + 1][d->y], '1', c))
 		ft_norm(d, 1, 0);
-	if (keycode == 2 && charcmp(d->matrix[d->x][d->y + 1], '1', c))
+	if (keycode == 100 && charcmp(d->matrix[d->x][d->y + 1], '1', c))
 		ft_norm(d, 0, 1);
-	if (keycode == 13 && charcmp(d->matrix[d->x - 1][d->y], '1', c))
+	if (keycode == 119 && charcmp(d->matrix[d->x - 1][d->y], '1', c))
 		ft_norm(d, -1, 0);
 	if (!count_c(d))
 	{

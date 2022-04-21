@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils_bouns.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: waboutzo <waboutzo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: waboutzo <waboutzo@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/28 19:23:58 by waboutzo          #+#    #+#             */
-/*   Updated: 2022/04/13 15:52:26 by waboutzo         ###   ########.fr       */
+/*   Updated: 2022/04/21 05:16:01 by waboutzo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/so_long_bouns.h"
+#include "../include/so_long_bonus.h"
 
 int	ft_strlen(char *s)
 {

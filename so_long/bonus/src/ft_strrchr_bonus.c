@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strrchr_bouns.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: waboutzo <waboutzo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: waboutzo <waboutzo@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/09 15:56:24 by waboutzo          #+#    #+#             */
-/*   Updated: 2022/04/13 15:52:18 by waboutzo         ###   ########.fr       */
+/*   Updated: 2022/04/21 05:15:39 by waboutzo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/so_long_bouns.h"
+#include "../include/so_long_bonus.h"
 
 char	*ft_strrchr(const char *s, int c)
 {

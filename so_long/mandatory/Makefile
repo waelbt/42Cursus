@@ -4,16 +4,16 @@ SRCS	=	src/*.c so_long.c
 
 OBJCT	=	${SRCS:.c=.o}
 
-FLAGES	=	-Wall -Wextra -Werror -lmlx -framework OpenGL -framework AppKit
+FLAGES	=	-L./minilibx -lmlx -lXext -lX11
 
 RM		=	rm -f
 
-CC		=	gcc
+CC		=	gcc -Wall -Wextra -Werror 
 
 all : $(NAME)
 
 $(NAME) : $(SRCS)
-	$(CC) $(FLAGES) $(SRCS) -o $(NAME)
+	$(CC) $(SRCS) $(FLAGES) -o $(NAME)
 
 clean :
 	${RM} ${OBJCT}

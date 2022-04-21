@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: waboutzo <waboutzo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: waboutzo <waboutzo@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/14 01:09:52 by waboutzo          #+#    #+#             */
-/*   Updated: 2022/04/14 01:09:53 by waboutzo         ###   ########.fr       */
+/*   Created: 2022/04/21 00:46:11 by waboutzo          #+#    #+#             */
+/*   Updated: 2022/04/21 05:14:52 by waboutzo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/so_long_bouns.h"
+#include "../include/so_long_bonus.h"
 
 static int	intlen(int n)
 {

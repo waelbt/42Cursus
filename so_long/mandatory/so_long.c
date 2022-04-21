@@ -20,6 +20,7 @@ void	error(char *str)
 
 int	key_management(int keycode, t_vars *vars)
 {
+	printf("%d\n", keycode);
 	if (keycode == 53 || keycode < 0)
 		exit(0);
 	else
@@ -47,7 +48,7 @@ int	main(int argc,	char **argv)
 		vars.win = mlx_new_window(vars.mlx, vars.wi, vars.he, "Hello world!");
 		initialise_images(&vars, "1.xpm");
 		ft_render(&vars);
-		mlx_hook(vars.win, 2, 0, key_management, &vars);
+		mlx_key_hook(vars.win, key_management, &vars);
 		mlx_hook(vars.win, 17, 0, key_management, &vars);
 		mlx_loop(vars.mlx);
 	}

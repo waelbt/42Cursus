@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   so_long_bouns.h                                    :+:      :+:    :+:   */
+/*   so_long_bonus.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: waboutzo <waboutzo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: waboutzo <waboutzo@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/13 15:51:46 by waboutzo          #+#    #+#             */
-/*   Updated: 2022/04/14 18:07:46 by waboutzo         ###   ########.fr       */
+/*   Created: 2022/04/21 05:14:19 by waboutzo          #+#    #+#             */
+/*   Updated: 2022/04/21 17:07:28 by waboutzo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SO_LONG_H
-# define SO_LONG_H
+#ifndef SO_LONG_BONUS_H
+# define SO_LONG_BONUS_H
 
 # define BUFFER_SIZE 1
 # include <unistd.h>
@@ -34,6 +34,8 @@ typedef struct s_vars {
 	void	*col;
 	void	*exi;
 	void	*bg;
+	void	*a;
+	void	*s;
 	char	**matrix;
 	int		width;
 	int		height;
@@ -45,6 +47,7 @@ typedef struct s_vars {
 	int		x;
 	int		y;
 	int		moves;
+	int		z;
 }				t_vars;
 
 char	*get_next_line(int fd);
@@ -76,4 +79,5 @@ int		charcmp(char c, char i, char j);
 int		end_game(t_vars *vars);
 char	*ft_itoa(int n);
 int		animation(t_vars *vars);
+void	norm54(t_vars *v, int *i, int j);
 #endif

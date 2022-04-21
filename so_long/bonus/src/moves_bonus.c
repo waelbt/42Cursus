@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   moves_bouns.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: waboutzo <waboutzo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: waboutzo <waboutzo@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/03 16:53:16 by waboutzo          #+#    #+#             */
-/*   Updated: 2022/04/14 01:10:51 by waboutzo         ###   ########.fr       */
+/*   Updated: 2022/04/21 05:16:21 by waboutzo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/so_long_bouns.h"
+#include "../include/so_long_bonus.h"
 
 void	find_player(t_vars *data)
 {
@@ -81,7 +81,7 @@ int	count_c(t_vars *data)
 
 void	ft_norm(t_vars *d, int i, int j)
 {
-	if(d->e != find_exit(d))
+	if (d->e != find_exit(d))
 		return ;
 	d->matrix[d->x + i][d->y + j] = 'P';
 	d->matrix[d->x][d->y] = '0';
@@ -93,24 +93,19 @@ void	moves(t_vars *d, int keycode)
 	static char	c = 'E';
 
 	find_player(d);
-	if(d->e == 0)
+	if (d->e == -1)
 		exit(0);
-	if (keycode == 0 && charcmp(d->matrix[d->x][d->y - 1], '1', c))
+	if (keycode == 97 && charcmp(d->matrix[d->x][d->y - 1], '1', c))
 		ft_norm(d, 0, -1);
-	if (keycode == 1 && charcmp(d->matrix[d->x + 1][d->y], '1', c))
+	if (keycode == 115 && charcmp(d->matrix[d->x + 1][d->y], '1', c))
 		ft_norm(d, 1, 0);
-	if (keycode == 2 && charcmp(d->matrix[d->x][d->y + 1], '1', c))
+	if (keycode == 100 && charcmp(d->matrix[d->x][d->y + 1], '1', c))
 		ft_norm(d, 0, 1);
-	if (keycode == 13 && charcmp(d->matrix[d->x - 1][d->y], '1', c))
+	if (keycode == 119 && charcmp(d->matrix[d->x - 1][d->y], '1', c))
 		ft_norm(d, -1, 0);
 	if (!count_c(d))
 	{
 		initialise_images(d, "2.xpm");
 		c = '1';
 	}
-	// if (d->e != find_exit(d))
-	// {
-	// 	ft_putstr("you win\n");
-	// 	exit(0);
-	// }
 }

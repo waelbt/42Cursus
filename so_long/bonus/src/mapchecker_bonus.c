@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   mapchecker_bouns.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: waboutzo <waboutzo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: waboutzo <waboutzo@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 08:41:25 by waboutzo          #+#    #+#             */
-/*   Updated: 2022/04/13 15:51:17 by waboutzo         ###   ########.fr       */
+/*   Updated: 2022/04/21 05:16:07 by waboutzo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/so_long_bouns.h"
+#include "../include/so_long_bonus.h"
 
 int	wall_check(char *str, t_vars *dim)
 {

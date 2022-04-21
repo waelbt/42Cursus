@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rendre_bouns.c                                     :+:      :+:    :+:   */
+/*   rendre_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: waboutzo <waboutzo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: waboutzo <waboutzo@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/10 15:10:45 by waboutzo          #+#    #+#             */
-/*   Updated: 2022/04/14 17:46:29 by waboutzo         ###   ########.fr       */
+/*   Updated: 2022/04/21 17:07:00 by waboutzo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/so_long_bouns.h"
+#include "../include/so_long_bonus.h"
 
 void	initialise_images(t_vars *v, char *e)
 {
@@ -23,11 +23,11 @@ void	initialise_images(t_vars *v, char *e)
 	free(str);
 	v->pla = mlx_xpm_file_to_image(v->mlx, "assets/player/1.xpm", &wid, &hei);
 	v->wal1 = mlx_xpm_file_to_image(v->mlx, "assets/wall/1.xpm", &wid, &hei);
-	v->c1 = mlx_xpm_file_to_image(v->mlx, "assets/wall/1_counter.xpm", &wid, &hei);
+	v->c1 = mlx_xpm_file_to_image(v->mlx, "assets/wall/1_c.xpm", &wid, &hei);
 	v->wal2 = mlx_xpm_file_to_image(v->mlx, "assets/wall/2.xpm", &wid, &hei);
-	v->c2 = mlx_xpm_file_to_image(v->mlx, "assets/wall/2_counter.xpm", &wid, &hei);
+	v->c2 = mlx_xpm_file_to_image(v->mlx, "assets/wall/2_c.xpm", &wid, &hei);
 	v->wal3 = mlx_xpm_file_to_image(v->mlx, "assets/wall/3.xpm", &wid, &hei);
-	v->c3 = mlx_xpm_file_to_image(v->mlx, "assets/wall/3_counter.xpm", &wid, &hei);
+	v->c3 = mlx_xpm_file_to_image(v->mlx, "assets/wall/3_c.xpm", &wid, &hei);
 	v->col = mlx_xpm_file_to_image(v->mlx, "assets/c/1.xpm", &wid, &hei);
 	v->bg = mlx_xpm_file_to_image(v->mlx, "assets/bg/1.xpm", &wid, &hei);
 }
@@ -38,6 +38,8 @@ void	ft_render(t_vars *v, void *s, void *c)
 	int	j;
 
 	j = 0;
+	v->a = c;
+	v->s = s;
 	while (j < v->height)
 	{
 		i = 0;
@@ -50,15 +52,7 @@ void	ft_render(t_vars *v, void *s, void *c)
 			else if (v->matrix[j][i] == 'E')
 				mlx_put_image_to_window(v->mlx, v->win, v->exi, 50 * i, 50 * j);
 			else if (v->matrix[j][i] == '1')
-			{
-				if(i == 0 && j == 0)
-				{
-					mlx_put_image_to_window(v->mlx, v->win, c, 100 * i, 50 * j);
-					i++;
-				}
-				else
-					mlx_put_image_to_window(v->mlx, v->win, s, 50 * i, 50 * j);
-			}
+				norm54(v, &i, j);
 			else
 				mlx_put_image_to_window(v->mlx, v->win, v->bg, 50 * i, 50 * j);
 			i++;
