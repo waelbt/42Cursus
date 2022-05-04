@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: waboutzo <waboutzo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: waboutzo <waboutzo@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/03 16:53:16 by waboutzo          #+#    #+#             */
-/*   Updated: 2022/04/14 19:45:58 by waboutzo         ###   ########.fr       */
+/*   Updated: 2022/05/03 22:38:30 by waboutzo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ void	error(char *str)
 
 int	key_management(int keycode, t_vars *vars)
 {
-	printf("%d\n", keycode);
 	if (keycode == 53 || keycode < 0)
 		exit(0);
 	else
@@ -37,11 +36,11 @@ int	main(int argc,	char **argv)
 	if (argc == 2)
 	{
 		if (ft_strcmp(ft_strrchr(argv[1], '.'), ".ber"))
-			error("error Invalid file");
+			error("error Invalid file\n");
 		ft_dimension(argv[1], &vars);
 		ft_matrix(argv[1], &vars);
 		if (!check_end_of_file(argv[1], &vars) || !ft_check(&vars))
-			error("error Invalid Map");
+			error("error Invalid Map\n");
 		vars.wi = 50 * vars.width;
 		vars.he = 50 * vars.height;
 		vars.mlx = mlx_init();

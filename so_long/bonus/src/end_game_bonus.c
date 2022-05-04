@@ -6,67 +6,115 @@
 /*   By: waboutzo <waboutzo@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 16:19:41 by waboutzo          #+#    #+#             */
-/*   Updated: 2022/04/21 17:07:12 by waboutzo         ###   ########.fr       */
+/*   Updated: 2022/05/03 18:44:22 by waboutzo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/so_long_bonus.h"
 
-int	end_game(t_vars *vars)
+void	end_game(t_vars *v, char *str)
 {
-	static int i;
-	static int j;
+	static int	i[2];
+	int			p[4];
+	char		*ptr;
 
-	if (vars->e != find_exit(vars) && vars->e != -1)
+	v->matrix[i[1]][i[0]] = '0';
+	ptr = "press any key to quit";
+	ft_render(v, v->wall.frame1, v->count.frame1);
+	if (i[0] >= v->width)
 	{
-		vars->matrix[j][i] = '0';
-		ft_render(vars, vars->wal1, vars->c1);
-		if(i >= vars->width)
+		i[0] = -1;
+		i[1]++;
+	}
+	if (i[1] >= v->height)
+	{
+		v->exit_counter = -1;
+		v->enemy_counter = -1;
+		p[0] = IMG_SIZE * (v->width - 1) / 2;
+		p[1] = IMG_SIZE * v->height / 2;
+		p[2] = IMG_SIZE * (v->width - 3) / 2;
+		p[3] = IMG_SIZE * (v->height + 1) / 2;
+		mlx_string_put(v->mlx, v->win, p[0], p[1], 0xCE00FF, str);
+		mlx_string_put(v->mlx, v->win, p[2], p[3], 0xCE00FF, ptr);
+	}
+	i[0]++;
+}
+
+int	animation(t_vars *v)
+{
+	static int	i;
+
+	if (v->exit_counter == count_char(v, 'E'))
+	{
+		ft_render(v, v->wall.frame1, v->count.frame1);
+		ft_render(v, v->wall.frame2, v->count.frame2);
+		ft_render(v, v->wall.frame3, v->count.frame3);
+		mlx_string_put(v->mlx, v->win, 42, 30, 0xCE00FF, ft_itoa(v->moves));
+	}
+	if (v->exit_counter != count_char(v, 'E')
+		&& v->exit_counter != -1 && i != 3)
+	{
+		i = 1;
+		end_game(v, "you win !!");
+	}
+	if (v->enemy_counter != count_char(v, 'H')
+		&& v->enemy_counter != -1 && i != 1)
+	{
+		i = 3;
+		end_game(v, "game over ^)");
+	}
+	return (0);
+}
+
+void	norm54(t_vars *v, int i, int j)
+{
+	if (v->matrix[j][i] == 'C')
+		mlx_put_image_to_window(v->mlx, v->win,
+			v->assests.frame1, IMG_SIZE * i, IMG_SIZE * j);
+	else if (v->matrix[j][i] == 'P')
+		mlx_put_image_to_window(v->mlx, v->win,
+			v->assests.frame2, IMG_SIZE * i, IMG_SIZE * j);
+	else if (v->matrix[j][i] == 'E')
+		mlx_put_image_to_window(v->mlx, v->win,
+			v->assests.frame3, IMG_SIZE * i, IMG_SIZE * j);
+	else if (v->matrix[j][i] == 'H')
+	{
+		mlx_put_image_to_window(v->mlx, v->win, v->bg,
+			IMG_SIZE * i, IMG_SIZE * j);
+		if (target_near(v, i, j))
+			angry_enmey(v, v->angry, i, j);
+		else
+			angry_enmey(v, v->enemy, i, j);
+	}
+}
+
+int	one_field(t_vars *v, int x, int y)
+{
+	if (x < v->height && y < v->width
+		&& x > 0 && y > 0)
+		return (1);
+	return (0);
+}
+
+int	target_near(t_vars *v, int x, int y)
+{
+	int	i;
+	int	j;
+
+	i = -2;
+	while (i <= 2)
+	{
+		j = -2;
+		while (j <= 2)
 		{
-			i = -1;
+			if (one_field(v, y + i, x + j))
+			{
+				if (v->matrix[y + i][x + j] == 'P')
+					return (1);
+			}
 			j++;
-		}
-		if(j >= vars->height)
-		{
-			vars->e = -1;
-			mlx_string_put(vars->mlx, vars->win, (50 * (vars->width - 1) / 2), (50 * vars->height / 2), 0xCE00FF, "you win !!");
-			mlx_string_put(vars->mlx, vars->win, (50 * (vars->width - 3) / 2), (50 * (vars->height + 1)/ 2), 0xCE00FF, "press in key to exit");
 		}
 		i++;
 	}
-	// segfaults fe end game
-	return 0;
-}
-
-int animation(t_vars *vars)
-{
-	if(vars->e == find_exit(vars))
-	{
-		if(vars->z >= 0 && vars->z < 20)
-			ft_render(vars, vars->wal1, vars->c1);
-		if(vars->z >= 20 && vars->z < 40)
-			ft_render(vars, vars->wal2, vars->c2);
-		if(vars->z >= 40 && vars->z < 60)
-		{
-			ft_render(vars, vars->wal3, vars->c3);
-			vars->z = 0;
-		}
-		vars->z++;
-		mlx_string_put(vars->mlx, vars->win, 42, 30, 0xCE00FF, ft_itoa(vars->moves));
-	}
-	else
-		end_game(vars);
-	return 0;
-}
-
-void	norm54(t_vars *v, int *i, int j)
-{
-	mlx_string_put(v->mlx, v->win, 42, 30, 0xCE00FF, ft_itoa(v->moves));
-	if (*i == 0 && j == 0)
-	{
-		mlx_put_image_to_window(v->mlx, v->win, v->a, 100 * *i, 50 * j);
-		(*i)++;
-	}
-	else
-		mlx_put_image_to_window(v->mlx, v->win, v->s, 50 * *i, 50 * j);
+	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: waboutzo <waboutzo@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/10 15:10:45 by waboutzo          #+#    #+#             */
-/*   Updated: 2022/04/21 17:07:00 by waboutzo         ###   ########.fr       */
+/*   Updated: 2022/05/03 18:08:37 by waboutzo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,50 +14,56 @@
 
 void	initialise_images(t_vars *v, char *e)
 {
-	int		wid;
-	int		hei;
+	int		w;
+	int		h;
 	char	*str;
 
-	str = ft_strjoin("assets/exit/", e);
-	v->exi = mlx_xpm_file_to_image(v->mlx, str, &wid, &hei);
+	str = ft_strjoin("assets/E/", e);
+	v->assests.frame3 = mlx_xpm_file_to_image(v->mlx, str, &w, &h);
 	free(str);
-	v->pla = mlx_xpm_file_to_image(v->mlx, "assets/player/1.xpm", &wid, &hei);
-	v->wal1 = mlx_xpm_file_to_image(v->mlx, "assets/wall/1.xpm", &wid, &hei);
-	v->c1 = mlx_xpm_file_to_image(v->mlx, "assets/wall/1_c.xpm", &wid, &hei);
-	v->wal2 = mlx_xpm_file_to_image(v->mlx, "assets/wall/2.xpm", &wid, &hei);
-	v->c2 = mlx_xpm_file_to_image(v->mlx, "assets/wall/2_c.xpm", &wid, &hei);
-	v->wal3 = mlx_xpm_file_to_image(v->mlx, "assets/wall/3.xpm", &wid, &hei);
-	v->c3 = mlx_xpm_file_to_image(v->mlx, "assets/wall/3_c.xpm", &wid, &hei);
-	v->col = mlx_xpm_file_to_image(v->mlx, "assets/c/1.xpm", &wid, &hei);
-	v->bg = mlx_xpm_file_to_image(v->mlx, "assets/bg/1.xpm", &wid, &hei);
+	v->assests.frame2 = mlx_xpm_file_to_image(v->mlx, "assets/P/1.xpm", &w, &h);
+	v->wall.frame1 = mlx_xpm_file_to_image(v->mlx, "assets/W/1.xpm", &w, &h);
+	v->count.frame1 = mlx_xpm_file_to_image(v->mlx, "assets/W/c1.xpm", &w, &h);
+	v->wall.frame2 = mlx_xpm_file_to_image(v->mlx, "assets/W/2.xpm", &w, &h);
+	v->count.frame2 = mlx_xpm_file_to_image(v->mlx, "assets/W/c2.xpm", &w, &h);
+	v->wall.frame3 = mlx_xpm_file_to_image(v->mlx, "assets/W/3.xpm", &w, &h);
+	v->count.frame3 = mlx_xpm_file_to_image(v->mlx, "assets/W/c3.xpm", &w, &h);
+	v->assests.frame1 = mlx_xpm_file_to_image(v->mlx, "assets/C/1.xpm", &w, &h);
+	v->bg = mlx_xpm_file_to_image(v->mlx, "assets/O/1.xpm", &w, &h);
+	v->enemy.frame1 = mlx_xpm_file_to_image(v->mlx, "assets/H/1.xpm", &w, &h);
+	v->enemy.frame2 = mlx_xpm_file_to_image(v->mlx, "assets/H/2.xpm", &w, &h);
+	v->enemy.frame3 = mlx_xpm_file_to_image(v->mlx, "assets/H/3.xpm", &w, &h);
+	v->angry.frame1 = mlx_xpm_file_to_image(v->mlx, "assets/H/1_1.xpm", &w, &h);
+	v->angry.frame2 = mlx_xpm_file_to_image(v->mlx, "assets/H/2_2.xpm", &w, &h);
+	v->angry.frame3 = mlx_xpm_file_to_image(v->mlx, "assets/H/3_3.xpm", &w, &h);
 }
 
 void	ft_render(t_vars *v, void *s, void *c)
 {
-	int	i;
-	int	j;
+	int	i[2];
 
-	j = 0;
-	v->a = c;
-	v->s = s;
-	while (j < v->height)
+	i[1] = -1;
+	while (++i[1] < v->height)
 	{
-		i = 0;
-		while (i < v->width)
+		i[0] = -1;
+		while (++i[0] < v->width)
 		{
-			if (v->matrix[j][i] == 'C')
-				mlx_put_image_to_window(v->mlx, v->win, v->col, 50 * i, 50 * j);
-			else if (v->matrix[j][i] == 'P')
-				mlx_put_image_to_window(v->mlx, v->win, v->pla, 50 * i, 50 * j);
-			else if (v->matrix[j][i] == 'E')
-				mlx_put_image_to_window(v->mlx, v->win, v->exi, 50 * i, 50 * j);
-			else if (v->matrix[j][i] == '1')
-				norm54(v, &i, j);
-			else
-				mlx_put_image_to_window(v->mlx, v->win, v->bg, 50 * i, 50 * j);
-			i++;
+			if (v->matrix[i[1]][i[0]] == '1')
+			{
+				mlx_string_put(v->mlx, v->win, 42,
+					30, 0xCE00FF, ft_itoa(v->moves));
+				if (i[0] == 0 && i[1] == 0)
+					mlx_put_image_to_window(v->mlx, v->win, c,
+						100 * i[0]++, IMG_SIZE * i[1]);
+				else
+					mlx_put_image_to_window(v->mlx, v->win, s,
+						IMG_SIZE * i[0], IMG_SIZE * i[1]);
+			}
+			else if (v->matrix[i[1]][i[0]] == '0')
+				mlx_put_image_to_window(v->mlx, v->win,
+					v->bg, IMG_SIZE * i[0], IMG_SIZE * i[1]);
+			norm54(v, i[0], i[1]);
 		}
-		j++;
 	}
 }
 

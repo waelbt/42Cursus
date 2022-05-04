@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mapchecker_bouns.c                                 :+:      :+:    :+:   */
+/*   mapchecker_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: waboutzo <waboutzo@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 08:41:25 by waboutzo          #+#    #+#             */
-/*   Updated: 2022/04/21 05:16:07 by waboutzo         ###   ########.fr       */
+/*   Updated: 2022/05/03 17:29:48 by waboutzo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,35 +35,39 @@ int	stranger_check(char *str)
 	{
 		if (str[j] != '1' && str[j] != 'E'
 			&& str[j] != '0' && str[j] != 'C'
-			&& str[j] != 'P')
+			&& str[j] != 'P' && str[j] != 'H')
 			return (0);
 		j++;
 	}
 	return (1);
 }
 
-void	content_counter(char *str, t_vars *a)
+void	content_counter(t_vars *v)
 {
-	int		i;
-	t_vars	b;
+	int	i;
+	int	j;
 
-	i = 0;
-	b.c = 0;
-	b.e = 0;
-	b.p = 0;
-	while (str[i])
+	j = 0;
+	v->collects_counter = 0;
+	v->exit_counter = 0;
+	v->player_counter = 0;
+	while (j < v->height)
 	{
-		if (str[i] == 'P')
-			b.p += 1;
-		if (str[i] == 'C')
-			b.c += 1;
-		if (str[i] == 'E')
-			b.e += 1;
-		i++;
+		i = 0;
+		while (i < v->width)
+		{
+			if (v->matrix[j][i] == 'P')
+				v->player_counter += 1;
+			else if (v->matrix[j][i] == 'C')
+				v->collects_counter += 1;
+			else if (v->matrix[j][i] == 'E')
+				v->exit_counter += 1;
+			else if (v->matrix[j][i] == 'H')
+				v->enemy_counter += 1;
+			i++;
+		}
+		j++;
 	}
-	a->c += b.c;
-	a->p += b.p;
-	a->e += b.e;
 }
 
 int	ft_check(t_vars *dim)
@@ -71,9 +75,6 @@ int	ft_check(t_vars *dim)
 	int		i;
 
 	i = 1;
-	dim->c = 0;
-	dim->e = 0;
-	dim->p = 0;
 	if (!wall_check(dim->matrix[0], dim))
 		return (0);
 	while (i < (dim->height - 1))
@@ -82,10 +83,11 @@ int	ft_check(t_vars *dim)
 			|| dim->matrix[i][dim->width - 1] != '1'
 				|| !stranger_check(dim->matrix[i]))
 			return (0);
-		content_counter(dim->matrix[i], dim);
 		i++;
 	}
-	if (dim->c < 1 || dim->p != 1 || dim->e < 1
+	content_counter(dim);
+	if (dim->collects_counter < 1 || dim->player_counter != 1
+		|| dim->exit_counter < 1
 		|| !wall_check(dim->matrix[dim->height - 1], dim)
 		|| (ft_strlen(dim->matrix[dim->height - 1]) != dim->width))
 		return (0);
