@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   moves.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: waboutzo <waboutzo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: waboutzo <waboutzo@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/03 16:53:16 by waboutzo          #+#    #+#             */
-/*   Updated: 2022/04/13 16:07:13 by waboutzo         ###   ########.fr       */
+/*   Updated: 2022/05/05 15:44:28 by waboutzo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ void	find_player(t_vars *data)
 		{
 			if (data->matrix[i][j] == 'P')
 			{
-				data->x = i;
-				data->y = j;
+				data->posx = i;
+				data->posy = j;
 				return ;
 			}
 			j++;
@@ -81,8 +81,8 @@ int	count_c(t_vars *data)
 
 void	ft_norm(t_vars *d, int i, int j)
 {
-	d->matrix[d->x + i][d->y + j] = 'P';
-	d->matrix[d->x][d->y] = '0';
+	d->matrix[d->posx + i][d->posy + j] = 'P';
+	d->matrix[d->posx][d->posy] = '0';
 	d->moves++;
 	ft_putstr("moves number: ");
 	ft_putnbr(d->moves);
@@ -94,13 +94,13 @@ void	moves(t_vars *d, int keycode)
 	static char	c = 'E';
 
 	find_player(d);
-	if (keycode == 97 && charcmp(d->matrix[d->x][d->y - 1], '1', c))
+	if (keycode == 97 && charcmp(d->matrix[d->posx][d->posy - 1], '1', c))
 		ft_norm(d, 0, -1);
-	if (keycode == 115 && charcmp(d->matrix[d->x + 1][d->y], '1', c))
+	if (keycode == 115 && charcmp(d->matrix[d->posx + 1][d->posy], '1', c))
 		ft_norm(d, 1, 0);
-	if (keycode == 100 && charcmp(d->matrix[d->x][d->y + 1], '1', c))
+	if (keycode == 100 && charcmp(d->matrix[d->posx][d->posy + 1], '1', c))
 		ft_norm(d, 0, 1);
-	if (keycode == 119 && charcmp(d->matrix[d->x - 1][d->y], '1', c))
+	if (keycode == 119 && charcmp(d->matrix[d->posx - 1][d->posy], '1', c))
 		ft_norm(d, -1, 0);
 	if (!count_c(d))
 	{

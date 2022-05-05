@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rendre.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: waboutzo <waboutzo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: waboutzo <waboutzo@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/10 15:10:45 by waboutzo          #+#    #+#             */
-/*   Updated: 2022/04/14 00:02:18 by waboutzo         ###   ########.fr       */
+/*   Created: 2022/05/05 16:02:45 by waboutzo          #+#    #+#             */
+/*   Updated: 2022/05/05 16:02:46 by waboutzo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,17 @@
 
 void	initialise_images(t_vars *v, char *e)
 {
-	int		wid;
-	int		hei;
+	int		w;
+	int		h;
 	char	*str;
 
-	str = ft_strjoin("assets/exit/", e);
-	v->exi = mlx_xpm_file_to_image(v->mlx, str, &wid, &hei);
+	str = ft_strjoin("assets/E/", e);
+	v->assets.exit = mlx_xpm_file_to_image(v->mlx, str, &w, &h);
 	free(str);
-	v->pla = mlx_xpm_file_to_image(v->mlx, "assets/player/1.xpm", &wid, &hei);
-	v->wal = mlx_xpm_file_to_image(v->mlx, "assets/wall/1.xpm", &wid, &hei);
-	v->col = mlx_xpm_file_to_image(v->mlx, "assets/c/1.xpm", &wid, &hei);
-	v->bg = mlx_xpm_file_to_image(v->mlx, "assets/bg/1.xpm", &wid, &hei);
+	v->assets.pla = mlx_xpm_file_to_image(v->mlx, "assets/P/1.xpm", &w, &h);
+	v->assets.wall = mlx_xpm_file_to_image(v->mlx, "assets/wall/1.xpm", &w, &h);
+	v->assets.col = mlx_xpm_file_to_image(v->mlx, "assets/C/1.xpm", &w, &h);
+	v->assets.bg = mlx_xpm_file_to_image(v->mlx, "assets/O/1.xpm", &w, &h);
 }
 
 void	ft_render(t_vars *v)
@@ -38,16 +38,13 @@ void	ft_render(t_vars *v)
 		i = 0;
 		while (i < v->width)
 		{
-			if (v->matrix[j][i] == 'C')
-				mlx_put_image_to_window(v->mlx, v->win, v->col, 50 * i, 50 * j);
-			else if (v->matrix[j][i] == 'P')
-				mlx_put_image_to_window(v->mlx, v->win, v->pla, 50 * i, 50 * j);
-			else if (v->matrix[j][i] == 'E')
-				mlx_put_image_to_window(v->mlx, v->win, v->exi, 50 * i, 50 * j);
-			else if (v->matrix[j][i] == '1')
-				mlx_put_image_to_window(v->mlx, v->win, v->wal, 50 * i, 50 * j);
-			else
-				mlx_put_image_to_window(v->mlx, v->win, v->bg, 50 * i, 50 * j);
+			norm(v, i, j);
+			if (v->matrix[j][i] == '1')
+				mlx_put_image_to_window(v->mlx, v->win, v->assets.wall,
+					IMG_SIZE * i, IMG_SIZE * j);
+			else if (v->matrix[j][i] == '0')
+				mlx_put_image_to_window(v->mlx, v->win, v->assets.bg,
+					IMG_SIZE * i, IMG_SIZE * j);
 			i++;
 		}
 		j++;

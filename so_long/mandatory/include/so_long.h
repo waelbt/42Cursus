@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: waboutzo <waboutzo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: waboutzo <waboutzo@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 08:31:26 by waboutzo          #+#    #+#             */
-/*   Updated: 2022/04/13 16:01:38 by waboutzo         ###   ########.fr       */
+/*   Updated: 2022/05/05 15:55:59 by waboutzo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define SO_LONG_H
 
 # define BUFFER_SIZE 1
+# define IMG_SIZE 50
 # include <unistd.h>
 # include <stdlib.h>
 # include <stdarg.h>
@@ -21,25 +22,30 @@
 # include <mlx.h>
 # include <fcntl.h>
 
+typedef struct assets{
+	void	*pla;
+	void	*wall;
+	void	*col;
+	void	*exit;
+	void	*bg;
+}	t_assets;
 typedef struct s_vars {
 	void	*mlx;
 	void	*win;
-	void	*pla;
-	void	*wal;
-	void	*col;
-	void	*exi;
-	void	*bg;
+
 	char	**matrix;
+
+	t_assets assets;
+
 	int		width;
 	int		height;
-	int		wi;
-	int		he;
+	int		moves;
+
 	int		e;
 	int		c;
 	int		p;
-	int		x;
-	int		y;
-	int		moves;
+	int		posx;
+	int		posy;
 }				t_vars;
 
 char	*get_next_line(int fd);
@@ -68,4 +74,5 @@ int		count_c(t_vars *data);
 int		find_exit(t_vars *data);
 int		ft_putnbr(int nb);
 int		charcmp(char c, char i, char j);
+void	norm(t_vars *v, int i, int j);
 #endif
